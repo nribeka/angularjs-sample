@@ -16,14 +16,18 @@ function($scope, $window, studentService) {
   });
 
   $scope.removeStudent = function(studentId) {
-    var student = studentService.getStudent(studentId);
-    if ($window.confirm("Do you really want to delete '" + student["name"] + "'?")) {
-      studentService.removeStudent(student).then(function() {
-        studentService.getStudents($scope.search).then(function() {
-          $scope.students = students;
-        })
-      });
-    }
+    // we could make this simpler by:
+    // * changing the signature method for removeStudent(studentId)
+    // * not displaying the name of the student we want to delete
+    studentService.getStudent(studentId).then(function(student) {
+      if ($window.confirm("Do you really want to delete '" + student["name"] + "'?")) {
+        studentService.removeStudent(student).then(function() {
+          studentService.getStudents($scope.search).then(function(students) {
+            $scope.students = students;
+          });
+        });
+      }
+    });
   }
 
   $scope.$watch('search', function (newValue, oldValue) {
