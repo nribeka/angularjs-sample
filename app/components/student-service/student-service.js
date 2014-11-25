@@ -8,7 +8,7 @@ sample.factory('studentService', ['students', function(students) {
   var getStudents = function(partialName) {
     var matches = [];
     angular.forEach(students, function(student, key) {
-      if (partialName === "") {
+      if (partialName === "" || partialName === undefined) {
         // no search term, push the student
         matches.push(student);
       } else if (student.hasOwnProperty("name")) {
@@ -21,11 +21,21 @@ sample.factory('studentService', ['students', function(students) {
     })
     return matches;
   };
+  // get a student using the student's id
+  var getStudent = function(id) {
+    return students[id];
+  };
   // add new student
   var addStudent = function(student) {
-    student["id"] = students.length;
+    var max = 0;
+    angular.forEach(students, function(student, key) {
+      if (max < key) {
+        max = key;
+      }
+    });
+    student["id"] = max + 1;
     // assign the student to the students map object
-    students[students.length] = student;
+    students[max + 1] = student;
   };
   // update a student
   var updateStudent = function(student) {
@@ -44,6 +54,7 @@ sample.factory('studentService', ['students', function(students) {
   // return the service methods
   return {
     addStudent: addStudent,
+    getStudent: getStudent,
     getStudents: getStudents,
     updateStudent: updateStudent,
     removeStudent: removeStudent

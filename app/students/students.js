@@ -9,8 +9,17 @@ angular.module('sample.students', ['ngRoute'])
   });
 }])
 
-.controller('StudentsCtrl', ['$scope', 'studentService', function($scope, studentService) {
-  $scope.students = studentService.getStudents("");
+.controller('StudentsCtrl', ['$scope', '$window', 'studentService',
+function($scope, $window, studentService) {
+  $scope.students = studentService.getStudents($scope.search);
+
+  $scope.removeStudent = function(studentId) {
+    var student = studentService.getStudent(studentId);
+    if ($window.confirm("Do you really want to delete '" + student["name"] + "'?")) {
+      studentService.removeStudent(student);
+    }
+    $scope.students = studentService.getStudents($scope.search);
+  }
 
   $scope.$watch('search', function (newValue, oldValue) {
     if (newValue != oldValue) {
