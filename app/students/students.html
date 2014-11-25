@@ -13,6 +13,11 @@
       <th>&nbsp;</th>
     </tr>
     <tbody>
+      <tr ng-hide="students.length">
+        <td colspan="3">
+          No student match your search term.
+        </td>
+      </tr>
       <tr ng-repeat="student in students">
         <td class="text-center"><a href="#/student/{{student.id}}"><i class="glyphicon glyphicon-file"></i></a></td>
         <td>{{student.name}}</td>
