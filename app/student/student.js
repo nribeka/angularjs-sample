@@ -36,7 +36,7 @@ function($scope, $location, $routeParams, studentService) {
   $scope.editing = true;
   $scope.header = "Student Record";
   studentService.getStudent($routeParams.studentId).then(function(student) {
-    $scope.student = student;
+    $scope.student = student.data;
   });
 
   $scope.editStudent = function() {
