@@ -22,7 +22,7 @@ sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $ti
     var deferred = $q.defer();
     $timeout(function() {
       deferred.resolve(matches);
-    }, 1000);
+    }, 500);
     return deferred.promise;
   };
 
@@ -31,7 +31,7 @@ sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $ti
     var deferred = $q.defer();
     $timeout(function() {
       deferred.resolve(students[id]);
-    }, 1000);
+    }, 500);
     return deferred.promise;
   };
   // add new student
@@ -48,7 +48,7 @@ sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $ti
     var deferred = $q.defer();
     $timeout(function() {
       deferred.resolve(student);
-    }, 1000);
+    }, 500);
     return deferred.promise;
   };
   // update a student
@@ -59,7 +59,7 @@ sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $ti
       var deferred = $q.defer();
       $timeout(function() {
         deferred.resolve(student);
-      }, 1000);
+      }, 500);
       return deferred.promise;
     }
   };
@@ -71,7 +71,7 @@ sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $ti
       var deferred = $q.defer();
       $timeout(function() {
         deferred.resolve(student);
-      }, 1000);
+      }, 500);
       return deferred.promise;
     }
   }
