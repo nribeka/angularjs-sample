@@ -19,8 +19,9 @@ function($scope, $location, studentService) {
   $scope.header = "Creating Student";
 
   $scope.saveStudent = function() {
-    studentService.addStudent($scope.student);
-    $location.path('#/students');
+    studentService.addStudent($scope.student).then(function() {
+      $location.path('#/students');
+    });
   }
 
   $scope.cancelEdit = function() {
@@ -34,7 +35,9 @@ function($scope, $location, $routeParams, studentService) {
   $scope.locked = true;
   $scope.editing = true;
   $scope.header = "Student Record";
-  $scope.student = studentService.getStudent($routeParams.studentId);
+  studentService.getStudent($routeParams.studentId).then(function(student) {
+    $scope.student = student;
+  });
 
   $scope.editStudent = function() {
     $scope.locked = false;
@@ -49,8 +52,9 @@ function($scope, $location, $routeParams, studentService) {
   }
 
   $scope.saveStudent = function() {
-    studentService.updateStudent($scope.student);
-    $location.path('#/students');
+    studentService.updateStudent($scope.student).then(function() {
+      $location.path('#/students');
+    });
   }
 
 }]);

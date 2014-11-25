@@ -3,7 +3,7 @@
 var sample = angular.module('sample.student-service', []);
 
 sample.value('students', {1: {"id": 1, "name": "Sample Student"}, 2: {"id": 2, "name": "Another Student"}});
-sample.factory('studentService', ['students', function(students) {
+sample.factory('studentService', ['$q', '$timeout', 'students', function($q, $timeout, students) {
   // search student with matching partial name
   var getStudents = function(partialName) {
     var matches = [];
@@ -19,11 +19,20 @@ sample.factory('studentService', ['students', function(students) {
         }
       }
     })
-    return matches;
+    var deferred = $q.defer();
+    $timeout(function() {
+      deferred.resolve(matches);
+    }, 1000);
+    return deferred.promise;
   };
+
   // get a student using the student's id
   var getStudent = function(id) {
-    return students[id];
+    var deferred = $q.defer();
+    $timeout(function() {
+      deferred.resolve(students[id]);
+    }, 1000);
+    return deferred.promise;
   };
   // add new student
   var addStudent = function(student) {
@@ -36,12 +45,22 @@ sample.factory('studentService', ['students', function(students) {
     student["id"] = max + 1;
     // assign the student to the students map object
     students[max + 1] = student;
+    var deferred = $q.defer();
+    $timeout(function() {
+      deferred.resolve(student);
+    }, 1000);
+    return deferred.promise;
   };
   // update a student
   var updateStudent = function(student) {
     if (student.hasOwnProperty("id")) {
       var id = student["id"];
       students[id] = student;
+      var deferred = $q.defer();
+      $timeout(function() {
+        deferred.resolve(student);
+      }, 1000);
+      return deferred.promise;
     }
   };
   // remove a student
@@ -49,6 +68,11 @@ sample.factory('studentService', ['students', function(students) {
     if (student.hasOwnProperty("id")) {
       var id = student["id"];
       delete students[id];
+      var deferred = $q.defer();
+      $timeout(function() {
+        deferred.resolve(student);
+      }, 1000);
+      return deferred.promise;
     }
   }
   // return the service methods
