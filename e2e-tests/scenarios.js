@@ -23,5 +23,21 @@ describe('sample', function() {
       expect(browser.getLocationAbsUrl()).toMatch('/students');
     });
 
+    it('should create new student and navigate to /students', function() {
+      element(by.model('student.name')).sendKeys("Just Student");
+      element(by.id('save-student')).click().then(function() {
+        expect(browser.getLocationAbsUrl()).toMatch('/students');
+        element.all(by.css('tr')).getText().then(function(data) {
+          expect(data).toContain('Just Student');
+        });
+      });
+    });
+  });
+
+  describe('update student', function() {
+
+    beforeEach(function() {
+      // prepare the student
+    });
   });
 });

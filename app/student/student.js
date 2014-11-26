@@ -20,6 +20,8 @@ function($scope, $location, studentService) {
 
   $scope.saveStudent = function() {
     studentService.addStudent($scope.student).then(function() {
+      // redirecting like this, seems to be hard to test.
+      // probably better to display message.
       $location.path('#/students');
     });
   }
@@ -53,6 +55,7 @@ function($scope, $location, $routeParams, studentService) {
 
   $scope.saveStudent = function() {
     studentService.updateStudent($scope.student).then(function() {
+      // same issue with above, as it seems to be hard to test this redirect.
       $location.path('#/students');
     });
   }
