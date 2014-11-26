@@ -2,40 +2,25 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('my app', function() {
+describe('sample', function() {
 
   browser.get('index.html');
 
-  it('should automatically redirect to /students when location hash/fragment is empty', function() {
-    expect(browser.getLocationAbsUrl()).toMatch("/students");
+  it('should automatically redirect to /students when location hash / fragment is empty', function() {
+    expect(browser.getLocationAbsUrl()).toMatch('/students');
   });
 
 
-  describe('view1', function() {
+  describe('create student', function() {
 
     beforeEach(function() {
-      browser.get('index.html#/view1');
+      // prepare the new student
+      browser.get('index.html#/newStudent');
     });
 
-
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 1/);
-    });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser.get('index.html#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
+    it('should cancel creating new student.', function() {
+      element(by.id('cancel-edit')).click();
+      expect(browser.getLocationAbsUrl()).toMatch('/students');
     });
 
   });

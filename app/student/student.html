@@ -11,13 +11,13 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <button ng-show="editing && locked" type="submit" ng-click="editStudent()" class="btn btn-default">
+      <button id="edit-student" ng-show="editing && locked" type="submit" ng-click="editStudent()" class="btn btn-default">
         Edit Student
       </button>
-      <button ng-show="!editing || !locked" type="submit" ng-click="saveStudent()" class="btn btn-default">
+      <button id="save-student" ng-show="!editing || !locked" type="submit" ng-click="saveStudent()" class="btn btn-default">
         Save Student
       </button>
-      <button type="submit" ng-click="cancelEdit()" class="btn btn-default">
+      <button id="cancel-edit" type="submit" ng-click="cancelEdit()" class="btn btn-default">
         Cancel
       </button>
     </div>
